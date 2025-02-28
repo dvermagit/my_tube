@@ -58,14 +58,19 @@ export const FilterCarousel = ({
         className="w-full px-12"
       >
         <CarouselContent className="-ml-3">
-          <CarouselItem className="pl-3 basis-auto">
-            <Badge
-              variant={!value ? "default" : "secondary"}
-              className="rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm"
+          {!isLoading && (
+            <CarouselItem
+              onClick={() => onSelect(null)}
+              className="pl-3 basis-auto"
             >
-              All
-            </Badge>
-          </CarouselItem>
+              <Badge
+                variant={!value ? "default" : "secondary"}
+                className="rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm"
+              >
+                All
+              </Badge>
+            </CarouselItem>
+          )}
           {isLoading &&
             Array.from({ length: 14 }).map((_, index) => (
               <CarouselItem key={index} className="pl-3 basis-auto">
@@ -76,9 +81,13 @@ export const FilterCarousel = ({
             ))}
           {!isLoading &&
             data.map((item) => (
-              <CarouselItem key={item.value} className="pl-3 basis-auto">
+              <CarouselItem
+                key={item.value}
+                className="pl-3 basis-auto"
+                onClick={() => onSelect(item.value)}
+              >
                 <Badge
-                  variant={value === null ? "default" : "secondary"}
+                  variant={value === item.value ? "default" : "secondary"}
                   className="rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm"
                 >
                   {item.label}
