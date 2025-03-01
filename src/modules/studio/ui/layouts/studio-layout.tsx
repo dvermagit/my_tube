@@ -1,0 +1,22 @@
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { StudioNavbar } from "../components/studio-navbar";
+import { StudioSidebar } from "../components/studio-sidebar";
+
+interface StudioLayoutProps {
+  children: React.ReactNode;
+}
+
+export const StudioLayout = ({ children }: StudioLayoutProps) => {
+  return (
+    <SidebarProvider>
+      <div className="w-full">
+        <StudioNavbar />
+
+        <div className="flex ">
+          <StudioSidebar />
+          <main className="flex-1 overflow-y-auto pt-[4rem]">{children}</main>
+        </div>
+      </div>
+    </SidebarProvider>
+  );
+};
