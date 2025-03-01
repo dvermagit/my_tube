@@ -11,6 +11,8 @@ const categoryNames = [
   "How-to and style",
   "Music",
   "News and politics",
+  "Sports",
+  "React",
 ];
 
 async function main() {
