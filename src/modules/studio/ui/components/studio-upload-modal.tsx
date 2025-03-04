@@ -49,7 +49,7 @@ export const StudioUploadModal = () => {
   return (
     <Button
       variant="secondary"
-      onClick={() => create.mutate({})} // Pass an empty object since `title` is optional
+      onClick={() => create.mutate()} // Pass an empty object since `title` is optional
       disabled={create.isPending} // Disable the button while the mutation is pending
     >
       {create.isPending ? (
