@@ -14,7 +14,7 @@ export const studioRouter = createTRPCRouter({
             updatedAt: z.date(),
           })
           .nullish(), // Make cursor optional
-        limit: z.number().default(10), // Add limit with a default value
+        limit: z.number().default(5), // Add limit with a default value
       })
     )
     .query(async ({ ctx, input }) => {
