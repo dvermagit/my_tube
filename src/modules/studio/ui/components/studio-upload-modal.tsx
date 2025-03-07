@@ -35,10 +35,13 @@ import { toast } from "sonner"; // For showing success/error messages
 
 export const StudioUploadModal = () => {
   const router = useRouter();
+  const utils = trpc.useUtils();
   const create = trpc.videos.create.useMutation({
     onSuccess: (data) => {
       // Redirect to the video edit page after creation
-      router.push(`/studio/${data.video.id}/edit`);
+      console.log({ data });
+      // router.push(`/studio/${data.video.id}/edit`);
+      utils.studio.getMany.invalidate();
       toast.success("Video created successfully!"); // Show success message
     },
     onError: (error) => {
