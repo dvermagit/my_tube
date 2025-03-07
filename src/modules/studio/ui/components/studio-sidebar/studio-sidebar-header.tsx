@@ -29,8 +29,8 @@ export const StudioSidebarHeader = () => {
         <SidebarMenuButton tooltip="Your profile" asChild>
           <Link href="/user/current">
             <UserAvatar
-              imageUrl={user.imageUrl}
-              name={user.fullName ?? "User"}
+              imageUrl={user.user?.imageUrl || "/logo.png"}
+              name={user.user?.fullName ?? "User"}
               size="xs"
             />
             <span className="text-sm">Your profile</span>
@@ -43,8 +43,8 @@ export const StudioSidebarHeader = () => {
     <SidebarHeader className="flex items-center justify-center pb-4">
       <Link href="/users/current">
         <UserAvatar
-          imageUrl={user.imageUrl}
-          name={user.fullName ?? "User"}
+          imageUrl={user.user?.imageUrl || "/logo.png"}
+          name={user.user?.fullName ?? "User"}
           className="size-[112px] hover:placeholder-opacity-80 transition-opacity"
         />
       </Link>
@@ -52,7 +52,7 @@ export const StudioSidebarHeader = () => {
         <p className="text-sm font-medium">Your Profile</p>
       </div>
 
-      <p>{user.fullName}</p>
+      <p>{user.user?.fullName}</p>
     </SidebarHeader>
   );
 };
