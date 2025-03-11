@@ -27,11 +27,13 @@
 // };
 
 "use client"; // Ensure this is a client component
+import { ResponsiveModal } from "@/components/responsive-modal";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/trpc/client";
 import { Loader2Icon, PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation"; // For redirecting after creation
 import { toast } from "sonner"; // For showing success/error messages
+import { StudioUploader } from "./studio-uploader";
 
 export const StudioUploadModal = () => {
   const router = useRouter();
@@ -50,17 +52,30 @@ export const StudioUploadModal = () => {
   });
 
   return (
-    <Button
-      variant="secondary"
-      onClick={() => create.mutate()} // Pass an empty object since `title` is optional
-      disabled={create.isPending} // Disable the button while the mutation is pending
-    >
-      {create.isPending ? (
-        <Loader2Icon className="animate-spin" />
-      ) : (
-        <PlusIcon className="mr-2 h-4 w-4" />
-      )}
-      Create
-    </Button>
+    <>
+      <ResponsiveModal
+        title="Upload a video"
+        open={!!create.data}
+        onOpenChange={() => create.reset()}
+      >
+        {create.data?.url ? (
+          <StudioUploader endpoint={create.data.url} onSuccess={() => {}} />
+        ) : (
+          <Loader2Icon />
+        )}
+      </ResponsiveModal>
+      <Button
+        variant="secondary"
+        onClick={() => create.mutate()} // Pass an empty object since `title` is optional
+        disabled={create.isPending} // Disable the button while the mutation is pending
+      >
+        {create.isPending ? (
+          <Loader2Icon className="animate-spin" />
+        ) : (
+          <PlusIcon className="mr-2 h-4 w-4" />
+        )}
+        Create
+      </Button>
+    </>
   );
 };
