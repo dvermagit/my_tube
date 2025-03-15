@@ -41,7 +41,6 @@ export const StudioUploadModal = () => {
   const create = trpc.videos.create.useMutation({
     onSuccess: (data) => {
       // Redirect to the video edit page after creation
-      console.log({ data });
       // router.push(`/studio/${data.video.id}/edit`);
       utils.studio.getMany.invalidate();
       toast.success("Video created successfully!"); // Show success message
@@ -51,6 +50,13 @@ export const StudioUploadModal = () => {
     },
   });
 
+  const onSuccess = () => {
+    if (!create.data?.video.id) return;
+
+    create.reset();
+    router.push(`/studio/videos/${create.data.video.id}`);
+  };
+
   return (
     <>
       <ResponsiveModal
@@ -59,7 +65,7 @@ export const StudioUploadModal = () => {
         onOpenChange={() => create.reset()}
       >
         {create.data?.url ? (
-          <StudioUploader endpoint={create.data.url} onSuccess={() => {}} />
+          <StudioUploader endpoint={create.data.url} onSuccess={onSuccess} />
         ) : (
           <Loader2Icon />
         )}
