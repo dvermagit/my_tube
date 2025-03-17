@@ -1,7 +1,7 @@
 export const SearchInput = () => {
   return (
     <form>
-      <div className="w-96  flex  text-gray-900 border hover:to-blue-500 rounded-l-full rounded-r-full p-0 pl-2 text-sm pr-0 ">
+      <div className="w-96 flex text-gray-900 border hover:to-blue-500 rounded-l-full rounded-r-full p-0 pl-2 text-sm pr-0">
         <input
           id="default-search"
           className="w-full text-black border-none outline-none"
@@ -19,9 +19,9 @@ export const SearchInput = () => {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round" // Use camelCase
+              strokeLinejoin="round" // Use camelCase
+              strokeWidth="2" // Use camelCase
               d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
             />
           </svg>
