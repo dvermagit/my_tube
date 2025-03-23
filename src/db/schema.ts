@@ -121,7 +121,7 @@ export const videoViewRelations = relations(videoViews, ({ one }) => ({
   videos: one(videos, {
     fields: [videoViews.videoId],
     references: [videos.id],
-  })mn,
+  }),
 }));
 
 export const videoViewSelectSchema = createSelectSchema(videoViews);
