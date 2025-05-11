@@ -1,4 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+
+//this is how protect routes works
 const isProtectedRoute = createRouteMatcher(["/studio(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
