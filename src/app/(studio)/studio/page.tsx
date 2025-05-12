@@ -4,7 +4,9 @@ import { HydrateClient, trpc } from "@/trpc/server";
 import { dehydrate } from "@tanstack/react-query";
 
 const Page = async () => {
-  void trpc.studio.getMany.prefetchInfinite({ limit: DEFAULT_LIMIT } as any);
+  void (await trpc.studio.getMany.prefetchInfinite({
+    limit: DEFAULT_LIMIT,
+  } as any));
   // const queryClient = await trpc.studio.getMany.prefetchQuery({
   //   limit: DEFAULT_LIMIT, // This should match the input schema of the `getMany` procedure
   // });

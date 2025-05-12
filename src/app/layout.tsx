@@ -24,8 +24,8 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <TRPCProvider>
-            {children}
             <Toaster />
+            {children}
           </TRPCProvider>
         </body>
       </html>

@@ -28,16 +28,17 @@ export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
 
-export const protectedProcedure = t.procedure.use(async function isAuth(opts) {
+export const protectedProcedure = t.procedure.use(async (opts) => {
   const { ctx } = opts;
 
   if (!ctx.clerkUserId) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
+  // Properly typed query
   const [user] = await db
     .select()
-    .from(users)
+    .from(users) // Now properly typed
     .where(eq(users.clerkId, ctx.clerkUserId))
     .limit(1);
 
@@ -45,16 +46,10 @@ export const protectedProcedure = t.procedure.use(async function isAuth(opts) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
-  const { success } = await ratelimit.limit(user.id);
-
-  if (!success) {
-    throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
-  }
-
   return opts.next({
     ctx: {
       ...ctx,
-      user,
+      user, // Now properly typed
     },
   });
 });
