@@ -1,5 +1,5 @@
 import { VideoView } from "@/modules/studio/ui/view/video-view";
-import { HydrateClient, trpc } from "@/trpc/server";
+import { HydrateClient, trpc } f rom "@/trpc/server";
 
 export const dynamic = "force-dynamic";
 
