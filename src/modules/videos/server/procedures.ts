@@ -21,6 +21,7 @@ import { z } from "zod";
 export const videosRouter = createTRPCRouter({
   getOne: baseProcedure
     .input(z.object({ id: z.string().uuid() }))
+
     .query(async ({ ctx, input }) => {
       const { clerkUserId } = ctx;
 
